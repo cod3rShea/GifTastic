@@ -43,6 +43,10 @@ body {
     justify-content: space-evenly;
 }
 
+.img-container {
+    width: 25%:;
+}
+
 img {
     width: 100%;
     max-width: 250px;

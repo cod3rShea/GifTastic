@@ -31,13 +31,16 @@ function renderGifs(arr) {
     $(".gifs-container").empty();
     for (var i = 0; i < arr.length; i++) {
         var stillImage = arr[i].images.original_still.url; 
+        var rating =  arr[i].rating;
+        var imgContainer = $("<div class='img-container img-" + i+ "'>");
         var gifImg = $("<img>");
+        var ratingContainer = $("<h2>Rating: <span>" + rating  + "</span></h2>");
+        imgContainer.append(gifImg);
         gifImg.attr("src", stillImage);
-        $(".gifs-container").append(gifImg);
-
-        var movingImage = arr[i].images.downsized.url;
+        imgContainer.append(ratingContainer)
+        $(".gifs-container").append(imgContainer);
+       
     }
-    gif.push(movingImage);
 }
 
 $('.buttons-container').on('click', ".food-button", function () {
