@@ -36,3 +36,23 @@ body {
 .add-button-container {
     width: 50%;
 }
+
+.gifs-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+img {
+    width: 100%;
+    max-width: 250px;
+}
+
+img {
+    width: 100%;
+    max-width: 250px;
+}
+
+img:nth-child(1n+6) {
+    margin-top: 20px;
+}

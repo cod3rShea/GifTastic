@@ -1,6 +1,9 @@
 
 
 var food = ["pizza", "nachos", "flaming hot cheetos", "pierogi", "french fries", "salmon", "sushi", "stir fry", "pho", "cheese", "steak", "tacos"];
+var gif = [];
+var movingImage;
+
 //  Render Buttons
 function renderButtons() {
     // Clears buttons container
@@ -27,26 +30,32 @@ function addButton() {
 function renderGifs(arr) {
     $(".gifs-container").empty();
     for (var i = 0; i < arr.length; i++) {
-        var stillImage = arr[i].images.original_still.url;        
+        var stillImage = arr[i].images.original_still.url; 
         var gifImg = $("<img>");
         gifImg.attr("src", stillImage);
-
         $(".gifs-container").append(gifImg);
-    }
-}
 
+        var movingImage = arr[i].images.downsized.url;
+    }
+    gif.push(movingImage);
+}
 
 $('.buttons-container').on('click', ".food-button", function () {
     var query = $(this).text();
     var apiURL = "https://api.giphy.com/v1/gifs/search?api_key=";
     var apiKey = "4KQWcmtyHSucocseM9aEsVOuOQiJGQqL"
-    
     var apiCall = apiURL + apiKey;
     $.get( apiCall + "&q=" + query, function(data){
         renderGifs(data.data);
       });
     
-})
+});
+
+
+
+$('.gifs-container').on('click', "img", function() {
+    console.log(gif);
+});
 
 
 $(document).ready(function () {
