@@ -2,7 +2,9 @@
 
 var food = ["pizza", "nachos", "flaming hot cheetos", "pierogi", "french fries", "salmon", "sushi", "stir fry", "pho", "cheese", "steak", "tacos"];
 var gif = [];
-var movingImage;
+var moveImage;
+var stillImage;
+
 
 //  Render Buttons
 function renderButtons() {
@@ -17,6 +19,7 @@ function renderButtons() {
         $(".buttons-container").append(button);
     }
 }
+
 // Add New Button
 function addButton() {
     $("#add-food").on("click", function (event) {
@@ -29,18 +32,31 @@ function addButton() {
 
 function renderGifs(arr) {
     $(".gifs-container").empty();
+    console.log(arr);
     for (var i = 0; i < arr.length; i++) {
-        var stillImage = arr[i].images.original_still.url; 
+        var stillImage = arr[i].images.original_still.url;
+        var moveImage = arr[i].images.original.url;
         var rating =  arr[i].rating;
         var imgContainer = $("<div class='img-container img-" + i+ "'>");
         var gifImg = $("<img>");
         var ratingContainer = $("<h2>Rating: <span>" + rating  + "</span></h2>");
         imgContainer.append(gifImg);
         gifImg.attr("src", stillImage);
+        gifImg.attr("data-gif", moveImage);
         imgContainer.append(ratingContainer)
         $(".gifs-container").append(imgContainer);
-       
+   
     }
+    
+    $('.img-container img').on('click', function() {
+        var test = $(this).attr("src");
+        var testTwo = $(this).attr("data-gif");
+
+        if ($(this).attr("src") != $(this).attr("data-gif")) {
+            $(this).attr("src", testTwo);
+            $(this).attr("data-gif", test);
+        }
+    });
 }
 
 $('.buttons-container').on('click', ".food-button", function () {
@@ -52,12 +68,6 @@ $('.buttons-container').on('click', ".food-button", function () {
         renderGifs(data.data);
       });
     
-});
-
-
-
-$('.gifs-container').on('click', "img", function() {
-    console.log(gif);
 });
 
 
